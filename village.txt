@@ -1,0 +1,56 @@
+#include <GLUT/glut.h>
+#include <math.h>
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    // Draw the background
+    glClearColor(0.7, 0.9, 1.0, 1.0);
+    
+    // Draw the sun
+    glColor3f(1.0, 1.0, 0.0);
+    glBegin(GL_POLYGON);
+    for(int i = 0; i < 360; i++) {
+        float theta = i * 3.14159 / 180.0f;
+        glVertex2f(0.8 + 0.1 * cos(theta), 0.8 + 0.1 * sin(theta));
+    }
+    glEnd();
+    
+    // Draw the hut
+        glColor3f(0.85, 0.65, 0.13);
+        glBegin(GL_POLYGON);
+        glVertex2f(-0.25, -0.25);
+        glVertex2f(-0.25, -0.6);
+        glVertex2f(0.25, -0.6);
+        glVertex2f(0.25, -0.25);
+        glEnd();
+        
+        glBegin(GL_TRIANGLES);
+        glVertex2f(-0.25, -0.25);
+        glVertex2f(0.0, 0.2);
+        glVertex2f(0.25, -0.25);
+        glEnd();
+        
+        // Flush the buffer and swap the buffers to display
+        glFlush();
+        glutSwapBuffers();
+    }
+
+int main(int argc, char **argv) {
+    // Initialize GLUT and create a window
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Village Environment");
+    
+    // Set the background color
+    glClearColor(0.7, 0.9, 1.0, 1.0);
+    
+    // Register the display function
+    glutDisplayFunc(display);
+    
+    // Enter the event processing loop
+    glutMainLoop();
+    
+    return 0;
+}
+
